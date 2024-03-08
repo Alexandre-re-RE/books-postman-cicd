@@ -26,6 +26,19 @@ class LivresController extends AppController
     }
 
     /**
+     * Liste method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function liste()
+    {
+        $livres = $this->Livres->find();
+
+        $this->set(compact('livres'));
+        $this->viewBuilder()->setOption('serialize', 'livres');
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Livre id.
