@@ -13,19 +13,6 @@ use App\Controller\AppController;
 class LivresController extends AppController
 {
     /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
-    public function index()
-    {
-        $query = $this->Livres->find();
-        $livres = $this->paginate($query);
-
-        $this->set(compact('livres'));
-    }
-
-    /**
      * Liste method
      *
      * @return \Cake\Http\Response|null|void Renders view
@@ -49,6 +36,7 @@ class LivresController extends AppController
     {
         $livre = $this->Livres->get($id, contain: ['LivreAuteur']);
         $this->set(compact('livre'));
+        $this->viewBuilder()->setOption('serialize', 'livre');
     }
 
     /**
@@ -69,6 +57,7 @@ class LivresController extends AppController
             $this->Flash->error(__('The livre could not be saved. Please, try again.'));
         }
         $this->set(compact('livre'));
+        $this->viewBuilder()->setOption('serialize', 'livre');
     }
 
     /**
@@ -91,6 +80,7 @@ class LivresController extends AppController
             $this->Flash->error(__('The livre could not be saved. Please, try again.'));
         }
         $this->set(compact('livre'));
+        $this->viewBuilder()->setOption('serialize', 'livre');
     }
 
     /**
@@ -110,6 +100,6 @@ class LivresController extends AppController
             $this->Flash->error(__('The livre could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        $this->viewBuilder()->setOption('serialize', 'livre');
     }
 }

@@ -13,16 +13,16 @@ use App\Controller\AppController;
 class AuteursController extends AppController
 {
     /**
-     * Index method
+     * Liste method
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index()
+    public function liste()
     {
-        $query = $this->Auteurs->find();
-        $auteurs = $this->paginate($query);
+        $auteurs = $this->Auteurs->find();
 
         $this->set(compact('auteurs'));
+        $this->viewBuilder()->setOption('serialize', 'auteurs');
     }
 
     /**
@@ -36,6 +36,7 @@ class AuteursController extends AppController
     {
         $auteur = $this->Auteurs->get($id, contain: ['LivreAuteur']);
         $this->set(compact('auteur'));
+        $this->viewBuilder()->setOption('serialize', 'auteur');
     }
 
     /**
@@ -56,6 +57,7 @@ class AuteursController extends AppController
             $this->Flash->error(__('The auteur could not be saved. Please, try again.'));
         }
         $this->set(compact('auteur'));
+        $this->viewBuilder()->setOption('serialize', 'auteur');
     }
 
     /**
@@ -78,6 +80,7 @@ class AuteursController extends AppController
             $this->Flash->error(__('The auteur could not be saved. Please, try again.'));
         }
         $this->set(compact('auteur'));
+        $this->viewBuilder()->setOption('serialize', 'auteur');
     }
 
     /**
@@ -97,6 +100,6 @@ class AuteursController extends AppController
             $this->Flash->error(__('The auteur could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        $this->viewBuilder()->setOption('serialize', 'auteur');
     }
 }
