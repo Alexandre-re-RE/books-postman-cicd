@@ -5,19 +5,20 @@ services:
 
   db-cicd:
     image: postgres
-    restart: always
     # set shared memory limit when using docker-compose
     shm_size: 128mb
     # or set shared memory limit when deploy via swarm stack
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: ${CONTAINER_DB_PASSWORD}
-      POSTGRES_USER: ${CONTAINER_DB_USER}
-    env_file:
-      - config/.env
+      POSTGRES_PASSWORD: azeqsd
+      POSTGRES_USER: books
+    ports:
+      - "5432:5432"
+    # env_file:
+    #   - ./config/.env
 
 volumes:
   postgres_data:
 
-# docker-compose -f docker-compose-postgres-init.yml up
+# docker-compose -f docker-compose-postgres-init.yml up -d
